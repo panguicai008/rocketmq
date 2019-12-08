@@ -18,6 +18,8 @@ package org.apache.rocketmq.remoting.netty;
 
 public class NettyServerConfig implements Cloneable {
     private int listenPort = 8888;
+    private int haListenPort = 8889;
+    private int fastListenPort = 9000;
     private int serverWorkerThreads = 8;
     private int serverCallbackExecutorThreads = 0;
     private int serverSelectorThreads = 3;
@@ -44,6 +46,24 @@ public class NettyServerConfig implements Cloneable {
 
     public void setListenPort(int listenPort) {
         this.listenPort = listenPort;
+    }
+
+    //add haListenPort
+    public int getHaListenPort() {
+        return haListenPort;
+    }
+
+    public void setHaListenPort(int haListenPort) {
+        this.haListenPort = haListenPort;
+    }
+
+    //add fastListenPort
+    public int getFastListenPort() {
+        return fastListenPort;
+    }
+
+    public void setFastListenPort(int fastListenPort) {
+        this.fastListenPort = fastListenPort;
     }
 
     public int getServerWorkerThreads() {
