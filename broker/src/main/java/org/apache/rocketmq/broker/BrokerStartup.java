@@ -63,6 +63,7 @@ public class BrokerStartup {
 
             controller.start();
 
+//            The broker[broker-b, 192.168.1.55:10900] boot success. serializeType=JSON and name server is 192.168.1.54:9876;192.168.1.55:9876
             String tip = "The broker[" + controller.getBrokerConfig().getBrokerName() + ", "
                 + controller.getBrokerAddr() + "] boot success. serializeType=" + RemotingCommand.getSerializeTypeConfigInThisServer();
 
@@ -113,7 +114,11 @@ public class BrokerStartup {
 
             nettyClientConfig.setUseTLS(Boolean.parseBoolean(System.getProperty(TLS_ENABLE,
                 String.valueOf(TlsSystemConfig.tlsMode == TlsMode.ENFORCING))));
+//            TODO
+            //init port
             nettyServerConfig.setListenPort(10911);
+            nettyServerConfig.setHaListenPort(10912);
+            nettyServerConfig.setFastListenPort(10909);
             final MessageStoreConfig messageStoreConfig = new MessageStoreConfig();
 
             if (BrokerRole.SLAVE == messageStoreConfig.getBrokerRole()) {
@@ -177,14 +182,18 @@ public class BrokerStartup {
                 default:
                     break;
             }
+//            TODO
+            //modify tree ports relation
+            messageStoreConfig.setHaListenPort(nettyServerConfig.getHaListenPort());
 
-            messageStoreConfig.setHaListenPort(nettyServerConfig.getListenPort() + 1);
+
             LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
             JoranConfigurator configurator = new JoranConfigurator();
             configurator.setContext(lc);
             lc.reset();
             configurator.doConfigure(brokerConfig.getRocketmqHome() + "/conf/logback_broker.xml");
 
+            // -p,--printConfigItem        Print all config item
             if (commandLine.hasOption('p')) {
                 InternalLogger console = InternalLoggerFactory.getLogger(LoggerName.BROKER_CONSOLE_NAME);
                 MixAll.printObjectProperties(console, brokerConfig);
@@ -192,6 +201,7 @@ public class BrokerStartup {
                 MixAll.printObjectProperties(console, nettyClientConfig);
                 MixAll.printObjectProperties(console, messageStoreConfig);
                 System.exit(0);
+//              -m,--printImportantConfig   Print important config item
             } else if (commandLine.hasOption('m')) {
                 InternalLogger console = InternalLoggerFactory.getLogger(LoggerName.BROKER_CONSOLE_NAME);
                 MixAll.printObjectProperties(console, brokerConfig, true);
