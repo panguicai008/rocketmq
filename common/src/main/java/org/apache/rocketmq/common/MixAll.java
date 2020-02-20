@@ -49,6 +49,10 @@ public class MixAll {
     public static final String ROCKETMQ_HOME_PROPERTY = "rocketmq.home.dir";
     public static final String NAMESRV_ADDR_ENV = "NAMESRV_ADDR";
     public static final String NAMESRV_ADDR_PROPERTY = "rocketmq.namesrv.addr";
+    public static final String NAMESRV_BROKER_IP1_PROPERTY = "rocketmq.broker.ip1";
+    public static final String NAMESRV_BROKER_IP2_PROPERTY = "rocketmq.broker.ip2";
+    public static final String ROCKETMQ_BROKER_IP1_ENV = "BROKER_IP1";
+    public static final String ROCKETMQ_BROKER_IP2_ENV = "BROKER_IP2";
     public static final String MESSAGE_COMPRESS_LEVEL = "rocketmq.message.compressLevel";
     public static final String DEFAULT_NAMESRV_ADDR_LOOKUP = "jmenv.tbsite.net";
     public static final String WS_DOMAIN_NAME = System.getProperty("rocketmq.namesrv.domain", DEFAULT_NAMESRV_ADDR_LOOKUP);

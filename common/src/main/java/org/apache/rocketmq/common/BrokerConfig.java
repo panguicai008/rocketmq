@@ -31,9 +31,15 @@ public class BrokerConfig {
     private String rocketmqHome = System.getProperty(MixAll.ROCKETMQ_HOME_PROPERTY, System.getenv(MixAll.ROCKETMQ_HOME_ENV));
     @ImportantField
     private String namesrvAddr = System.getProperty(MixAll.NAMESRV_ADDR_PROPERTY, System.getenv(MixAll.NAMESRV_ADDR_ENV));
+//    @ImportantField
+//    private String brokerIP1 = RemotingUtil.getLocalAddress();
+//    private String brokerIP2 = RemotingUtil.getLocalAddress();
+//    @ImportantField
+//    private String brokerIP1 = System.getenv(MixAll.ROCKETMQ_BROKER_IP1_ENV);
+//    private String brokerIP2 = System.getenv(MixAll.ROCKETMQ_BROKER_IP2_ENV);
     @ImportantField
-    private String brokerIP1 = RemotingUtil.getLocalAddress();
-    private String brokerIP2 = RemotingUtil.getLocalAddress();
+    private String brokerIP1 = System.getProperty(MixAll.NAMESRV_BROKER_IP1_PROPERTY, System.getenv(MixAll.ROCKETMQ_BROKER_IP1_ENV));
+    private String brokerIP2 = System.getProperty(MixAll.NAMESRV_BROKER_IP2_PROPERTY, System.getenv(MixAll.ROCKETMQ_BROKER_IP2_ENV));
     @ImportantField
     private String brokerName = localHostName();
     @ImportantField
